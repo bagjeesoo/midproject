@@ -1,0 +1,5 @@
+package com.midproject.tripin.controller;
+
+public class PlaceController {
+
+}

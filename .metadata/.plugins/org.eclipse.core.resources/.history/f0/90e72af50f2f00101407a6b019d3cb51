@@ -1,0 +1,6 @@
+$(function(){
+	
+	$('.bg-primary').click(function(){
+		alert('로그인')
+	})
+})

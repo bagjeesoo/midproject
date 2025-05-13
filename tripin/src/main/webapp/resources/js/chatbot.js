@@ -1,0 +1,28 @@
+$(function(){
+	
+	$('#loginBtn').click(function(){
+		alert('로그인');
+		location.href='login.do'
+	})
+	
+	$('.option-button').click(function(){
+		let requestPlace = $(this).text().trim()+"갈 여행지를 추천해주세요";
+		
+		$.ajax({
+			type:"get"
+			, data:{question:requestPlace}
+			, url: "http://127.0.0.1:5000"
+			, contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+			, dataType: "text"
+			, success: function(result){
+				$('#answerText').text(result);
+			}
+			, error: function(err){
+				alert('실패');
+				console.log(err);	
+			}
+			
+		})
+		
+	})
+})

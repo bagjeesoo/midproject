@@ -1,0 +1,6 @@
+$(function(){
+	
+	$('.items-center .bg-primary').click(function(){
+		alert('로그인')
+	})
+})
