@@ -1,0 +1,12 @@
+package com.midproject.tripins.service.impl;
+
+import com.midproject.tripin.model.ChatbotRecommendationVO;
+
+public class ChatbotServiceImpl implements ChatbotService {
+	ChatbotRecommendationVO getChatList() {
+		
+	}
+	void insertChat(ChatbotRecommendationVO vo) {
+		
+	}
+}

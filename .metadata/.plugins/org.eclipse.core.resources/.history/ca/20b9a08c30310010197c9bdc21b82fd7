@@ -1,0 +1,15 @@
+package com.midproject.tripins.service.impl;
+
+import org.springframework.stereotype.Service;
+
+import com.midproject.tripin.model.ChatbotRecommendationVO;
+
+@Service
+public class ChatbotServiceImpl implements ChatbotService {
+	public ChatbotRecommendationVO getChatList() {
+		return 
+	}
+	public void insertChat(ChatbotRecommendationVO vo) {
+		
+	}
+}

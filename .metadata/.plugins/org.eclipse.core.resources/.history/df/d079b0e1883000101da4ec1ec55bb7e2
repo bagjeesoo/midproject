@@ -1,0 +1,29 @@
+$(function(){
+	
+	/*$('#place-saved').click(function(){
+		
+		$('#content-themes').hide();
+		$('#content-reviews').hide();
+		
+		$('#content-places').show();
+
+	})
+	
+	$('#themes-saved').click(function(){
+		
+		$('#content-reviews').hide();
+		$('#content-places').hide();
+		
+		$('#content-themes').show();
+	})
+
+	$('#review-written').click(function(){
+		
+		$('#content-places').hide();
+		$('#content-themes').hide();
+		
+		$('#content-reviews').show();
+	})*/
+	
+	
+})

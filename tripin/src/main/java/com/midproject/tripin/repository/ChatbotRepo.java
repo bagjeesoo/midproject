@@ -1,8 +1,20 @@
 package com.midproject.tripin.repository;
 
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
-@Repository
-public class ChatbotRepo {
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import com.midproject.tripin.model.ChatbotRecommendationVO;
+import com.midproject.tripin.model.FAQVO;
+import com.midproject.tripin.model.InquiriesVO;
+
+@Mapper
+public interface ChatbotRepo {
+	List<ChatbotRecommendationVO> getChatList(Integer user_id);
+	void insertChat(ChatbotRecommendationVO vo);
+	
+	FAQVO inquireResponseSelect(Integer inquiry_id);
+	List<InquiriesVO> getInquiriesList(@PathVariable Integer user_id);
+	void insertInqChat(InquiriesVO vo);
 }

@@ -1,0 +1,11 @@
+package com.midproject.tripin.repository;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.midproject.tripin.model.ChatbotRecommendationVO;
+
+@Mapper
+public interface ChatbotRepo {
+	ChatbotRecommendationVO getChatList(Integer chatId);
+	void insertChat(ChatbotRecommendationVO vo);
+}

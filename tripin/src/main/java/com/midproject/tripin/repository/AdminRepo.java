@@ -1,8 +1,8 @@
 package com.midproject.tripin.repository;
 
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
-@Repository
-public class AdminRepo {
+@Mapper
+public interface AdminRepo {
 
 }

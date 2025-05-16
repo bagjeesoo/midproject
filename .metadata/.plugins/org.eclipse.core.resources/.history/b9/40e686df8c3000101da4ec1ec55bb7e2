@@ -1,0 +1,36 @@
+$(function(){
+	
+	$('#place-saved').click(function(){
+		$(this).addClass("tab-active");
+		$('#themes-saved').removeClass("tab-active");
+		$('#review-written').removeClass("tab-active");
+		
+		$('#content-themes').hide();
+		$('#content-reviews').hide();
+		
+		
+		
+		$('#content-places').show();
+
+	})
+	
+	$('#themes-saved').click(function(){
+		$(this).addClass("tab-active");
+		
+		$('#content-reviews').hide();
+		$('#content-places').hide();
+		
+		$('#content-themes').show();
+	})
+
+	$('#review-written').click(function(){
+		
+		$('#content-places').hide();
+		$('#content-themes').hide();
+		
+		$('#content-reviews').show();
+	})
+	
+	
+	
+})

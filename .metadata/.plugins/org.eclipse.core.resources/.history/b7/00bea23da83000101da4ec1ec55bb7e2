@@ -1,0 +1,141 @@
+@charset "UTF-8";
+
+
+/* 상단 텍스트 */
+.main-text {
+    text-align: center;
+    margin-bottom: 3rem; /* mb-12 = 48px */
+}
+
+.main-title {
+    font-size: 1.875rem; /* text-3xl ≈ 30px */
+    font-weight: bold;
+    color: #111827; 
+    margin-bottom: 1rem; /* mb-4 = 16px */
+}
+
+.main-subtext {
+    color: #4B5563; 
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* 여행계획, 고객문의 호버 */
+.tab-buttons {
+    display: flex;
+    gap: 0.5rem; /* gap-2 = 8px */
+    margin-bottom: 1.5rem; /* mb-6 = 24px */
+}
+
+.tab-buttons button {
+    flex: 1;
+    padding: 0.75rem 1rem; /* py-3 px-4 */
+    border-radius: 9999px; /* rounded-full */
+    font-weight: 500;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* 활성 탭 (여행 계획) */
+.tab-active {
+    background-color: #3B82F6; /* Tailwind bg-primary */
+    color: white;
+}
+
+/* 비활성 탭 (고객 문의) */
+.tab-inactive {
+    background-color: transparent;
+    color: #4B5563; /* text-gray-600 */
+}
+
+.tab-inactive:hover {
+    background-color: #F3F4F6; /* hover:bg-gray-100 */
+}
+
+/* 챗봇 컨테이너 */
+.chat-container {
+    flex-grow: 1;
+    height: 600px;
+    overflow-y: auto;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.chat-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.chat-avatar {
+    width: 2rem;
+    height: 2rem;
+    background-color: #3B82F6; /* primary */
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.icon-white {
+    color: white;
+}
+
+.chat-content {
+    flex-grow: 1;
+}
+
+.chat-bubble {
+    background-color: #f3f4f6; /* gray-100 */
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: inline-block;
+}
+
+.chat-text {
+    color: #1f2937; /* gray-800 */
+    margin: 0;
+}
+
+.chat-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+    .chat-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.option-button {
+    background-color: white;
+    color: #3B82F6;
+    border: 2px solid #3B82F6;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: background-color 0.3s, color 0.3s;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.option-button:hover {
+    background-color: #3B82F6;
+    color: white;
+}
+

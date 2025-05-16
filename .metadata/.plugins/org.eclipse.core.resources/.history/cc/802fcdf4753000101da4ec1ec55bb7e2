@@ -1,0 +1,11 @@
+$(function(){
+	
+	$('#place-saved').click(function(){
+		
+		$('#content-saved').show();
+		
+		$('#content-themes').hide();
+		$('#content-reviews').hide();
+	})
+	
+})

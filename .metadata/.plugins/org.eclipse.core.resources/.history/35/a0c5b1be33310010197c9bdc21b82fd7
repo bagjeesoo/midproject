@@ -1,0 +1,22 @@
+package com.midproject.tripins.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.midproject.tripin.model.ChatbotRecommendationVO;
+import com.midproject.tripin.repository.ChatbotRepo;
+
+@Service
+public class ChatbotServiceImpl implements ChatbotService {
+	
+	@Autowired
+	private ChatbotRepo chatbotRepo;
+	
+	
+	public ChatbotRecommendationVO getChatList() {
+		return chatbotRepo.getChatList();
+	}
+	public void insertChat(ChatbotRecommendationVO vo) {
+		chatbotRepo.insertChat(vo);
+	}
+}

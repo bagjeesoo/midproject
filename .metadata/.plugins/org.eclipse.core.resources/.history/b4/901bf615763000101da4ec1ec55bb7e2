@@ -1,0 +1,24 @@
+$(function(){
+	
+	$('#place-saved').click(function(){
+		
+		$('#content-themes').hide();
+		$('#content-reviews').hide();
+		
+		$('#content-saved').show();
+		
+
+	})
+	
+	$('#tema-saved').click(function(){
+		
+		
+		$('#content-themes').show();
+	})
+
+	$('#review-saved').click(function(){
+		
+		
+		$('#content-themes').show();
+	})
+})

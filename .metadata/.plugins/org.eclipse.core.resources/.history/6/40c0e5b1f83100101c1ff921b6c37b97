@@ -1,0 +1,836 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> 챗봇 페이지 </title>
+<!-- Pacifico 폰트 링크 -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<!-- Noto Sans KR 폰트 링크 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+<!-- Remix icon 아이콘 폰트 라이브러리 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<!-- 내 css 파일경로 -->
+<link href="resources/css/chatbot.css" rel="stylesheet">
+<!-- jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- 내 js 파일경로 -->
+<script type="text/javascript" src="resources/js/chatbot.js"></script>
+</head>
+<body class="bg-gray-50">
+	
+	<!-- 헤더 -->
+	<header class="place_list_header">
+	  <div class="container">
+	    <!-- 타이틀 -->
+	    <div class="left-header">
+	     <a href="#" class="main_title">Tripin</a> 
+	     <nav class="main-nav">
+	     	<a href="#" class="home">홈</a>
+	     	<a href="#" class="trivy">트리비와 대화하기</a>
+	     	<a href="#" class="theme">테마여행</a>      
+	     </nav>	
+	    </div>
+	  <div class="icon-group">
+	    <button class="icon-button">
+	      <i class="ri-user-line"></i>
+	    </button>
+	  </div>
+	  </div>
+	</header>
+		<main class="main-section">
+			<div class="max-w-5xl mx-auto">
+				<div class="main-text">
+					<h1 class="main-title">
+						AI 여행 플래너와 함께<br>나만의 테마여행을 계획해보세요
+					</h1>
+					<p class="main-subtext">
+						여행 계획부터 문의사항까지<br>AI가 도와드립니다
+					</p>
+				</div>
+				<div class="card-box">
+					<div class="tab-buttons">
+						<button id="travelTab" class="tab-active">여행 계획</button>
+						<button id="supportTab"	class="tab-inactive">고객 문의</button>
+					</div>
+					<div class="flex gap-6">
+						<div id="chat-reco-container" class="chat-container">
+							<div class="chat-message">
+								<div class="chat-row chat-row-left">
+									<div class="chat-avatar">
+										<i class="ri-robot-line text-white"></i>
+									</div>
+									<div class="chat-content">
+										<div class="chat-bubble">
+											<p class="chat-text">안녕하세요! 저는 당신의 AI여행 플래너 '트리비'입니다. 어떤 여행을 계획하고 계신가요?</p>
+										</div>
+										<div class="chat-options">
+											<button class="option-button">
+												<i class="ri-group-line mr-2"></i>가족 여행
+											</button>
+											<button class="option-button">
+												<i class="ri-heart-line mr-2"></i>커플 여행
+											</button>
+											<button class="option-button">
+												<i class="ri-user-line mr-2"></i>혼자 여행
+											</button>
+											<button class="option-button">
+												<i class="ri-user-line mr-2"></i>친구와 함께
+											</button>
+										</div>										
+									</div>
+								</div>
+								
+								<!-- 이전 대화 기록 전체 가져오기 수정필요 ****대화안나옴********************** -->
+								<%-- <c:forEach var="chat" items="${chatList}">
+									<div class="chat-row chat-row-right">
+										<div class="chat-bubble-right">
+											<p class="chat-text-white">${chat.user_query}</p>
+										</div>
+										<div class="chat-avatar">
+											<i class="ri-robot-line text-white"></i>
+										</div>
+									</div>
+		
+									<div class="chat-row chat-row-left">
+										<div class="chat-avatar">
+											<i class="ri-robot-line text-white"></i>
+										</div>
+										<div class="chat-bubble">											
+											<p class="chat-text">${chat.chatbot_resp}</p>
+										</div>
+									</div>
+								</c:forEach> --%>
+								
+							</div>
+						</div>
+						<!-- 고객문의 기본 -->
+						<div id="chat-inq-container" class="chat-container">
+							<div class="chat-message">
+								<div class="chat-row chat-row-left">
+									<div class="chat-avatar">
+										<i class="ri-robot-line text-white"></i>
+									</div>
+									<div class="chat-content">
+										<div class="chat-bubble">
+											<p class="chat-text">안녕하세요! 고객센터입니다. 문의하실 내용을 선택해주세요!</p>
+										</div>
+										<div class="chat-options">
+											<button class="option-button">
+												<i class="ri-group-line mr-2"></i>이용 문의
+											</button>
+											<button class="option-button">
+												<i class="ri-heart-line mr-2"></i>신고 문의
+											</button>
+											<button class="option-button">
+												<i class="ri-user-line mr-2"></i>추천 문의
+											</button>
+											<button class="option-button">
+												<i class="ri-user-line mr-2"></i>1:1 문의
+											</button>
+										</div>										
+									</div>
+								</div>
+								
+								<!-- 이전 대화 기록 전체 가져오기 수정필요 ****대화안나옴********************** -->
+								<%-- <c:forEach var="chat" items="${chatList}">
+									<div class="chat-row chat-row-right">
+										<div class="chat-bubble-right">
+											<p class="chat-text-white">${chat.user_query}</p>
+										</div>
+										<div class="chat-avatar">
+											<i class="ri-robot-line text-white"></i>
+										</div>
+									</div>
+		
+									<div class="chat-row chat-row-left">
+										<div class="chat-avatar">
+											<i class="ri-robot-line text-white"></i>
+										</div>
+										<div class="chat-bubble">											
+											<p class="chat-text">${chat.chatbot_resp}</p>
+										</div>
+									</div>
+								</c:forEach> --%>
+								
+							</div>
+						</div>
+						
+						<div class="message-input-wrapper">
+							<div class="message-input-row">
+								<input type="text" placeholder="메시지를 입력하세요..." class="message-input">
+								<button id="send_btn" class="message-input">
+									<i class="ri-send-plane-fill"></i> 보내기
+								</button>
+							</div>
+						</div>
+					</div>
+					
+					<!-- 저장된 여행일정 => 테마추천으로? -->
+					<div class="w-96 bg-white rounded-xl shadow-lg p-6"
+						id="saved-itineraries">
+						<div class="flex items-center justify-between mb-6">
+							<h2 class="text-xl font-bold text-gray-900">저장된 여행 일정</h2>
+							<button class="text-sm text-primary hover:text-primary/80">전체보기</button>
+						</div>
+						<div class="space-y-4">
+							<div class="bg-gray-50 rounded-lg p-4 border border-gray-100">
+								<div class="flex justify-between items-start mb-3">
+									<div>
+										<span
+											class="text-xs font-medium text-primary px-2 py-1 bg-primary/10 rounded-full">가족
+											여행</span>
+										<h3 class="text-lg font-bold text-gray-900 mt-2">제주도 4박
+											5일</h3>
+									</div>
+									<div class="flex gap-2">
+										<button class="text-gray-400 hover:text-primary">
+											<i class="ri-edit-line"></i>
+										</button>
+										<button class="text-gray-400 hover:text-red-500">
+											<i class="ri-delete-bin-line"></i>
+										</button>
+									</div>
+								</div>
+								<p class="text-gray-600 text-sm mb-3">제주 동부 → 서부 → 남부 코스</p>
+								<div class="flex justify-between items-center">
+									<span class="text-sm text-gray-500">2025.05.15 -
+										2025.05.19</span>
+									<button class="text-primary text-sm font-medium">자세히
+										보기</button>
+								</div>
+							</div>
+							<div class="bg-gray-50 rounded-lg p-4 border border-gray-100">
+								<div class="flex justify-between items-start mb-3">
+									<div>
+										<span
+											class="text-xs font-medium text-secondary px-2 py-1 bg-secondary/10 rounded-full">커플
+											여행</span>
+										<h3 class="text-lg font-bold text-gray-900 mt-2">강릉 2박 3일</h3>
+									</div>
+									<div class="flex gap-2">
+										<button class="text-gray-400 hover:text-primary">
+											<i class="ri-edit-line"></i>
+										</button>
+										<button class="text-gray-400 hover:text-red-500">
+											<i class="ri-delete-bin-line"></i>
+										</button>
+									</div>
+								</div>
+								<p class="text-gray-600 text-sm mb-3">경포대 → 주문진 → 안목해변 코스</p>
+								<div class="flex justify-between items-center">
+									<span class="text-sm text-gray-500">2025.05.10 -
+										2025.05.12</span>
+									<button class="text-primary text-sm font-medium">자세히
+										보기</button>
+								</div>
+							</div>
+							<div class="bg-gray-50 rounded-lg p-4 border border-gray-100">
+								<div class="flex justify-between items-start mb-3">
+									<div>
+										<span
+											class="text-xs font-medium text-orange-500 px-2 py-1 bg-orange-500/10 rounded-full">맛집
+											탐방</span>
+										<h3 class="text-lg font-bold text-gray-900 mt-2">전주 당일치기</h3>
+									</div>
+									<div class="flex gap-2">
+										<button class="text-gray-400 hover:text-primary">
+											<i class="ri-edit-line"></i>
+										</button>
+										<button class="text-gray-400 hover:text-red-500">
+											<i class="ri-delete-bin-line"></i>
+										</button>
+									</div>
+								</div>
+								<p class="text-gray-600 text-sm mb-3">한옥마을 → 남부시장 → 객리단길 코스</p>
+								<div class="flex justify-between items-center">
+									<span class="text-sm text-gray-500">2025.05.05</span>
+									<button class="text-primary text-sm font-medium">자세히
+										보기</button>
+								</div>
+							</div>
+						</div>
+						<div class="itinerary-card bg-gray-50 rounded-lg p-4">
+							<div class="flex justify-between items-start mb-3">
+								<div>
+									<span
+										class="text-xs font-medium text-primary px-2 py-1 bg-primary/10 rounded-full">가족
+										여행</span>
+									<h3 class="text-lg font-bold text-gray-900 mt-2">제주도 4박 5일</h3>
+								</div>
+								<button class="text-gray-400 hover:text-red-500">
+									<i class="ri-delete-bin-line"></i>
+								</button>
+							</div>
+							<p class="text-gray-600 text-sm mb-3">제주 동부 → 서부 → 남부 코스</p>
+							<div class="flex justify-between items-center">
+								<span class="text-sm text-gray-500">2025.05.15 -
+									2025.05.19</span>
+								<button class="text-primary text-sm font-medium">자세히 보기</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer class="custom-footer">
+	        <div class="footer-container">
+	            <div class="footer-content">
+	                <div class="footer-left">
+	                    <p class="footer-text">© 2025 Tripin. 모든 권리 보유.</p>
+	                </div>
+	                <div class="footer-links">
+	                    <a href="#">고객센터</a>
+	                    <a href="#">개인정보 처리방침</a>
+	                    <a href="#">이용약관</a>
+	                    <a href="#">로그아웃</a>
+	                </div>
+	            </div>
+	        </div>
+   		 </footer>
+	</div>
+	<script type="text/javascript" crossorigin="anonymous"
+		src="https://us-assets.i.posthog.com/array/phc_t9tkQZJiyi2ps9zUYm8TDsL6qXo4YmZx0Ot5rBlAlEd/config.js"></script>
+	<script type="text/javascript" crossorigin="anonymous"
+		src="https://us-assets.i.posthog.com/static/dead-clicks-autocapture.js?v=1.240.6"></script>
+	<!-- <script> -->
+	
+document.addEventListener('DOMContentLoaded', function() {
+const chatContainer = document.getElementById('chat-container');
+const optionButtons = document.querySelectorAll('.option-button');
+const savedItineraries = document.getElementById('saved-itineraries');
+const travelTab = document.getElementById('travelTab');
+const supportTab = document.getElementById('supportTab');
+let conversationState = 'initial';
+let currentMode = 'travel';
+
+/* function switchMode(mode) {
+currentMode = mode;
+chatContainer.innerHTML = '';
+if (mode === 'travel') {
+travelTab.classList.add('bg-primary', 'text-white');
+travelTab.classList.remove('text-gray-600', 'hover:bg-gray-100');
+supportTab.classList.remove('bg-primary', 'text-white');
+supportTab.classList.add('text-gray-600', 'hover:bg-gray-100');
+addMessage("안녕하세요! 저는 당신의 여행 플래너입니다. 어떤 여행을 계획하고 계신가요?");
+addTravelOptions();
+} else {
+supportTab.classList.add('bg-primary', 'text-white');
+supportTab.classList.remove('text-gray-600', 'hover:bg-gray-100');
+travelTab.classList.remove('bg-primary', 'text-white');
+travelTab.classList.add('text-gray-600', 'hover:bg-gray-100');
+addMessage("안녕하세요! 무엇을 도와드릴까요?");
+addSupportOptions();
+}
+} */
+
+
+/* function addSupportOptions() {
+const supportOptionsDiv = document.createElement('div');
+supportOptionsDiv.className = 'chat-message';
+supportOptionsDiv.innerHTML = `
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+<i class="ri-robot-line text-white"></i>
+</div>
+<div class="flex-grow">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+<button class="option-button bg-white border-2 border-primary text-primary px-4 py-3 rounded-lg font-medium hover:bg-primary hover:text-white transition-colors">
+<i class="ri-question-line mr-2"></i>예약 문의
+</button>
+<button class="option-button bg-white border-2 border-primary text-primary px-4 py-3 rounded-lg font-medium hover:bg-primary hover:text-white transition-colors">
+<i class="ri-refund-line mr-2"></i>환불 요청
+</button>
+<button class="option-button bg-white border-2 border-primary text-primary px-4 py-3 rounded-lg font-medium hover:bg-primary hover:text-white transition-colors">
+<i class="ri-service-line mr-2"></i>서비스 이용
+</button>
+<button class="option-button bg-white border-2 border-primary text-primary px-4 py-3 rounded-lg font-medium hover:bg-primary hover:text-white transition-colors">
+<i class="ri-error-warning-line mr-2"></i>기타 문의
+</button>
+</div>
+</div>
+</div>
+`;
+chatContainer.appendChild(supportOptionsDiv);
+} */
+
+
+travelTab.addEventListener('click', () => switchMode('travel'));
+supportTab.addEventListener('click', () => switchMode('support'));
+/* function addTravelOptions() {
+const travelOptionsDiv = document.createElement('div');
+travelOptionsDiv.className = 'chat-message';
+travelOptionsDiv.innerHTML = `
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+<i class="ri-robot-line text-white"></i>
+</div>
+<div class="flex-grow">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+<button class="option-button bg-white border-2 border-primary text-primary px-4 py-3 rounded-lg font-medium hover:bg-primary hover:text-white transition-colors">
+<i class="ri-group-line mr-2"></i>가족 여행
+</button>
+<button class="option-button bg-white border-2 border-primary text-primary px-4 py-3 rounded-lg font-medium hover:bg-primary hover:text-white transition-colors">
+<i class="ri-heart-line mr-2"></i>커플 여행
+</button>
+<button class="option-button bg-white border-2 border-primary text-primary px-4 py-3 rounded-lg font-medium hover:bg-primary hover:text-white transition-colors">
+<i class="ri-user-line mr-2"></i>혼자 여행
+</button>
+<button class="option-button bg-white border-2 border-primary text-primary px-4 py-3 rounded-lg font-medium hover:bg-primary hover:text-white transition-colors">
+<i class="ri-team-line mr-2"></i>친구와 함께
+</button>
+</div>
+</div>
+</div>
+`;
+chatContainer.appendChild(travelOptionsDiv);
+} */
+
+
+/* function addMessage(content, isUser = false) {
+  const messageDiv = document.createElement('div');
+  messageDiv.className = 'chat-message';
+
+  const containerDiv = document.createElement('div');
+  containerDiv.className = 'flex items-start gap-3';
+  if (isUser) containerDiv.classList.add('justify-end');
+
+  if (!isUser) {
+    const robotDiv = document.createElement('div');
+    robotDiv.className = 'w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0';
+
+    const robotIcon = document.createElement('i');
+    robotIcon.className = 'ri-robot-line text-white';
+
+    robotDiv.appendChild(robotIcon);
+    containerDiv.appendChild(robotDiv);
+  }
+
+  const contentWrapper = document.createElement('div');
+  contentWrapper.className = 'flex-grow';
+  if (isUser) contentWrapper.classList.add('text-right');
+
+  const messageBubble = document.createElement('div');
+  messageBubble.className = `rounded-lg p-4 inline-block ${isUser ? 'bg-primary text-white' : 'bg-gray-100 text-gray-800'}`;
+
+  const paragraph = document.createElement('p');
+  paragraph.textContent = content;
+
+  messageBubble.appendChild(paragraph);
+  contentWrapper.appendChild(messageBubble);
+  containerDiv.appendChild(contentWrapper);
+
+  if (isUser) {
+    const userDiv = document.createElement('div');
+    userDiv.className = 'w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0';
+
+    const userIcon = document.createElement('i');
+    userIcon.className = 'ri-user-line text-gray-600';
+
+    userDiv.appendChild(userIcon);
+    containerDiv.appendChild(userDiv);
+  }
+
+  messageDiv.appendChild(containerDiv);
+  chatContainer.appendChild(messageDiv);
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+} */
+
+
+/* function showTypingIndicator() {
+const typingDiv = document.createElement('div');
+typingDiv.className = 'chat-message typing-message';
+typingDiv.innerHTML = `
+<div class="flex items-start gap-3">
+<div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+<i class="ri-robot-line text-white"></i>
+</div>
+<div class="typing-indicator">
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+`;
+chatContainer.appendChild(typingDiv);
+chatContainer.scrollTop = chatContainer.scrollHeight;
+return typingDiv;
+} */
+
+
+/* function removeTypingIndicator() {
+const typingMessage = document.querySelector('.typing-message');
+if (typingMessage) {
+typingMessage.remove();
+}
+} */
+
+
+/* function askNextQuestion(travelType) {
+const typingIndicator = showTypingIndicator();
+setTimeout(() => {
+removeTypingIndicator();
+if (conversationState === 'initial') {
+addMessage(`${travelType}을 선택하셨네요! 여행 기간은 어떻게 되시나요?`);
+const durationOptions = [
+'2박 3일', '3박 4일', '4박 5일', '5박 6일'
+];
+addOptionsButtons(durationOptions, 'duration');
+conversationState = 'duration';
+}
+}, 1500);
+} */
+
+
+/* function addOptionsButtons(options, type) {
+  const buttonsDiv = document.createElement('div');
+  buttonsDiv.className = 'chat-message';
+
+  const container = document.createElement('div');
+  container.className = 'flex items-start gap-3';
+
+  const robotDiv = document.createElement('div');
+  robotDiv.className = 'w-8 h-8 bg-primary rounded-full flex items-center justify-center flex-shrink-0';
+
+  const robotIcon = document.createElement('i');
+  robotIcon.className = 'ri-robot-line text-white';
+  robotDiv.appendChild(robotIcon);
+
+  const optionsWrapper = document.createElement('div');
+  optionsWrapper.className = 'flex-grow';
+
+  const gridDiv = document.createElement('div');
+  gridDiv.className = 'grid grid-cols-2 gap-3 mt-4';
+
+  options.forEach(option => {
+    const button = document.createElement('button');
+    button.className = 'option-button bg-white border-2 border-primary text-primary px-4 py-3 rounded-lg font-medium hover:bg-primary hover:text-white transition-colors';
+    button.setAttribute('data-type', type);
+    button.textContent = option;
+
+    button.addEventListener('click', function () {
+      const selectedOption = this.textContent.trim();
+      addMessage(selectedOption, true);
+      if (type === 'duration') {
+        showItinerary(selectedOption);
+        savedItineraries.classList.remove('hidden');
+      }
+    });
+
+    gridDiv.appendChild(button);
+  });
+
+  optionsWrapper.appendChild(gridDiv);
+  container.appendChild(robotDiv);
+  container.appendChild(optionsWrapper);
+  buttonsDiv.appendChild(container);
+  chatContainer.appendChild(buttonsDiv);
+  chatContainer.scrollTop = chatContainer.scrollHeight;
+} */
+
+
+function showItinerary(duration) {
+  const typingIndicator = showTypingIndicator();
+
+  setTimeout(() => {
+    removeTypingIndicator();
+
+    // 기본 일정 메시지
+    const itineraryText = [
+      "여행 일정을 생성했습니다! 다음은 추천 일정입니다:",
+      "1일차: 제주공항 → 성산일출봉 → 섭지코지 → 아쿠아플라넷",
+      "2일차: 우도 투어 → 만장굴 → 김녕해수욕장",
+      "3일차: 한라산 등반 → 에코랜드 → 노형수퍼마켓"
+    ];
+
+    if (duration === '4박 5일' || duration === '5박 6일') {
+      itineraryText.push(
+        "4일차: 올레시장 → 천지연폭포 → 서귀포매일올레시장",
+        "5일차: 카멜리아힐 → 오설록티뮤지엄 → 협재해수욕장"
+      );
+    }
+
+    itineraryText.push("이 일정은 어떠신가요? 저장하시겠습니까?");
+    addMessage(itineraryText.join('\n'));
+
+    // 버튼 박스 생성
+    const buttonWrapper = document.createElement('div');
+    buttonWrapper.className = 'flex flex-col gap-3';
+
+    // 저장 버튼
+    const saveBtn = document.createElement('button');
+    saveBtn.className = 'bg-primary text-white px-6 py-3 !rounded-button font-medium flex items-center justify-center gap-2';
+    saveBtn.onclick = saveItinerary;
+
+    const saveIcon = document.createElement('i');
+    saveIcon.className = 'ri-save-line';
+    saveBtn.appendChild(saveIcon);
+    saveBtn.appendChild(document.createTextNode('일정 저장하기'));
+
+    // 수정 버튼
+    const editBtn = document.createElement('button');
+    editBtn.className = 'bg-white text-primary border border-primary px-6 py-3 !rounded-button font-medium flex items-center justify-center gap-2';
+    editBtn.onclick = modifyItinerary;
+
+    const editIcon = document.createElement('i');
+    editIcon.className = 'ri-edit-line';
+    editBtn.appendChild(editIcon);
+    editBtn.appendChild(document.createTextNode('일정 수정하기'));
+
+    buttonWrapper.appendChild(saveBtn);
+    buttonWrapper.appendChild(editBtn);
+
+    addMessage(buttonWrapper.outerHTML);
+  }, 2000);
+}
+
+
+/* window.saveItinerary = function() {
+addMessage('일정이 저장되었습니다! 저장된 일정 목록에서 확인하실 수 있습니다.', true);
+const savedItineraries = document.getElementById('saved-itineraries');
+savedItineraries.classList.remove('hidden');
+}; */
+
+
+/* window.modifyItinerary = function() {
+addMessage('어떤 부분을 수정하고 싶으신가요? 아래 옵션 중 선택해주세요.');
+addMessage(`
+<div class="grid grid-cols-2 gap-3 mt-2">
+<button class="bg-white border-2 border-primary text-primary px-4 py-3 rounded-lg font-medium hover:bg-primary hover:text-white transition-colors">일정 순서 변경</button>
+<button class="bg-white border-2 border-primary text-primary px-4 py-3 rounded-lg font-medium hover:bg-primary hover:text-white transition-colors">장소 변경</button>
+<button class="bg-white border-2 border-primary text-primary px-4 py-3 rounded-lg font-medium hover:bg-primary hover:text-white transition-colors">시간 조정</button>
+<button class="bg-white border-2 border-primary text-primary px-4 py-3 rounded-lg font-medium hover:bg-primary hover:text-white transition-colors">일정 추가</button>
+</div>
+`);
+}; */
+
+
+
+});
+</script>
+	<!-- 헤더 -->
+	<header class="bg-white shadow-sm sticky top-0 z-50">
+		<div
+			class="container mx-auto px-4 py-3 flex items-center justify-between">
+			<div class="flex items-center">
+				<a href="#" class="font-['Pacifico'] text-primary text-2xl">Tripin</a>
+				<nav class="ml-8 hidden md:flex">
+					<a href="#"
+						class="px-4 py-2 text-gray-700 hover:text-primary font-medium">홈</a>
+					<a href="#"
+						class="px-4 py-2 text-gray-700 hover:text-primary font-medium">여행지</a>
+					<a href="#"
+						class="px-4 py-2 text-gray-700 hover:text-primary font-medium">테마여행</a>
+					<a href="#"
+						class="px-4 py-2 text-gray-700 hover:text-primary font-medium">커뮤니티</a>
+					<a href="#"
+						class="px-4 py-2 text-gray-700 hover:text-primary font-medium">뉴스</a>
+				</nav>
+			</div>
+			<div class="flex items-center space-x-4">
+				<div class="relative hidden md:block">
+					<input type="text"
+						class="search-input bg-gray-100 pl-10 pr-4 py-2 rounded-full text-sm border-none w-64"
+						placeholder="여행지, 테마 검색">
+					<div
+						class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-500">
+						<i class="ri-search-line"></i>
+					</div>
+				</div>
+				<a href="#" class="text-gray-700 hover:text-primary">
+					<div class="w-10 h-10 flex items-center justify-center">
+						<i class="ri-user-line ri-lg"></i>
+					</div>
+				</a>
+				<button
+					class="bg-primary text-white px-4 py-2 !rounded-button whitespace-nowrap hidden md:block">로그인</button>
+				<div
+					class="w-10 h-10 flex items-center justify-center md:hidden text-gray-700">
+					<i class="ri-menu-line ri-lg"></i>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<footer class="bg-gray-900 text-white pt-16 pb-8">
+		<div class="container mx-auto px-4">
+			<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+				<div>
+					<a href="#"
+						class="font-['Pacifico'] text-white text-2xl mb-4 block">Tripin</a>
+					<p class="text-gray-400 mb-4">당신의 특별한 여행을 위한 최고의 파트너, Tripin과
+						함께 잊지 못할 추억을 만들어보세요.</p>
+					<div class="flex space-x-4">
+						<a href="#" class="text-gray-400 hover:text-white">
+							<div class="w-8 h-8 flex items-center justify-center">
+								<i class="ri-instagram-line"></i>
+							</div>
+						</a> <a href="#" class="text-gray-400 hover:text-white">
+							<div class="w-8 h-8 flex items-center justify-center">
+								<i class="ri-facebook-circle-line"></i>
+							</div>
+						</a> <a href="#" class="text-gray-400 hover:text-white">
+							<div class="w-8 h-8 flex items-center justify-center">
+								<i class="ri-youtube-line"></i>
+							</div>
+						</a> <a href="#" class="text-gray-400 hover:text-white">
+							<div class="w-8 h-8 flex items-center justify-center">
+								<i class="ri-twitter-x-line"></i>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div>
+					<h3 class="text-lg font-bold mb-4">서비스</h3>
+					<ul class="space-y-2">
+						<li><a href="#" class="text-gray-400 hover:text-white">여행지
+								검색</a></li>
+						<li><a href="#" class="text-gray-400 hover:text-white">테마
+								여행</a></li>
+						<li><a href="#" class="text-gray-400 hover:text-white">일정
+								만들기</a></li>
+						<li><a href="#" class="text-gray-400 hover:text-white">리뷰
+								및 평점</a></li>
+						<li><a href="#" class="text-gray-400 hover:text-white">여행
+								뉴스</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="text-lg font-bold mb-4">고객지원</h3>
+					<ul class="space-y-2">
+						<li><a href="#" class="text-gray-400 hover:text-white">자주
+								묻는 질문</a></li>
+						<li><a href="#" class="text-gray-400 hover:text-white">1:1
+								문의</a></li>
+						<li><a href="#" class="text-gray-400 hover:text-white">이용약관</a></li>
+						<li><a href="#" class="text-gray-400 hover:text-white">개인정보처리방침</a></li>
+						<li><a href="#" class="text-gray-400 hover:text-white">사이트맵</a></li>
+					</ul>
+				</div>
+				<div>
+					<h3 class="text-lg font-bold mb-4">연락처</h3>
+					<ul class="space-y-2">
+						<li class="flex items-center text-gray-400">
+							<div class="w-5 h-5 flex items-center justify-center mr-2">
+								<i class="ri-map-pin-line"></i>
+							</div> 서울특별시 강남구 테헤란로 123
+						</li>
+						<li class="flex items-center text-gray-400">
+							<div class="w-5 h-5 flex items-center justify-center mr-2">
+								<i class="ri-phone-line"></i>
+							</div> 02-123-4567
+						</li>
+						<li class="flex items-center text-gray-400">
+							<div class="w-5 h-5 flex items-center justify-center mr-2">
+								<i class="ri-mail-line"></i>
+							</div> info@tripin.kr
+						</li>
+					</ul>
+					<div class="mt-4">
+						<h4 class="text-sm font-medium mb-2">결제 수단</h4>
+						<div class="flex space-x-3">
+							<div
+								class="w-8 h-8 flex items-center justify-center text-gray-400">
+								<i class="ri-visa-line"></i>
+							</div>
+							<div
+								class="w-8 h-8 flex items-center justify-center text-gray-400">
+								<i class="ri-mastercard-line"></i>
+							</div>
+							<div
+								class="w-8 h-8 flex items-center justify-center text-gray-400">
+								<i class="ri-paypal-line"></i>
+							</div>
+							<div
+								class="w-8 h-8 flex items-center justify-center text-gray-400">
+								<i class="ri-kakao-talk-fill"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="border-t border-gray-800 pt-8">
+				<p class="text-gray-500 text-sm text-center">© 2025 Tripin. All
+					rights reserved.</p>
+			</div>
+		</div>
+	</footer>
+
+	<section class="py-16 bg-gray-50">
+		<div class="container mx-auto px-4">
+			<div
+				class="max-w-3xl mx-auto bg-white rounded-xl shadow-md p-8 text-center">
+				<h2 class="text-2xl font-bold text-gray-900 mb-3">여행 소식을 놓치지
+					마세요</h2>
+				<p class="text-gray-600 mb-6">최신 여행 트렌드, 특별 할인 정보, 숨은 여행지 소식을
+					이메일로 받아보세요</p>
+				<div class="flex flex-col sm:flex-row gap-3 max-w-lg mx-auto">
+					<input type="email" placeholder="이메일 주소를 입력하세요"
+						class="flex-grow px-4 py-3 border border-gray-300 rounded-lg text-gray-700 focus:border-primary">
+					<button
+						class="bg-primary text-white px-6 py-3 !rounded-button font-medium whitespace-nowrap">구독하기</button>
+				</div>
+				<p class="text-xs text-gray-500 mt-4">구독 신청 시 개인정보 처리방침에 동의하게
+					됩니다</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- 플로팅 챗봇 버튼 -->
+	<div class="fixed bottom-6 right-6 z-50">
+		<button
+			class="bg-primary text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center">
+			<i class="ri-message-3-line ri-lg"></i>
+		</button>
+	</div>
+	<script>
+document.addEventListener('DOMContentLoaded', function() {
+// 커스텀 셀렉트 토글
+const selectButtons = document.querySelectorAll('.custom-select button');
+selectButtons.forEach(button => {
+button.addEventListener('click', function() {
+const parent = this.closest('.custom-select');
+parent.classList.toggle('active');
+});
+});
+// 셀렉트 옵션 선택
+const selectOptions = document.querySelectorAll('.custom-select-options div');
+selectOptions.forEach(option => {
+option.addEventListener('click', function() {
+const parent = this.closest('.custom-select');
+const button = parent.querySelector('button span');
+button.textContent = this.textContent;
+parent.classList.remove('active');
+});
+});
+// 외부 클릭 시 셀렉트 닫기
+document.addEventListener('click', function(event) {
+const selects = document.querySelectorAll('.custom-select.active');
+selects.forEach(select => {
+if (!select.contains(event.target)) {
+select.classList.remove('active');
+}
+});
+});
+});
+</script>
+	<script>
+    !function (t, e) { var o, n, p, r; e.__SV || (window.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split("."); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } } (p = t.createElement("script")).type = "text/javascript", p.crossOrigin = "anonymous", p.async = !0, p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js", (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = "posthog", u.people = u.people || [], u.toString = function (t) { var e = "posthog"; return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e }, u.people.toString = function () { return u.toString(1) + ".people (stub)" }, o = "init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "), n = 0; n < o.length; n++)g(u, o[n]); e._i.push([i, s, a]) }, e.__SV = 1) }(document, window.posthog || []);
+    posthog.init('phc_t9tkQZJiyi2ps9zUYm8TDsL6qXo4YmZx0Ot5rBlAlEd', {
+        api_host: 'https://us.i.posthog.com',
+        autocapture: false,
+        capture_pageview: false,
+        capture_pageleave: false,
+        capture_performance: {
+            web_vitals: false,
+        },
+        rageclick: false,
+    })
+    window.shareKey = 'vvu1-S91ByqFvJ6UrZFq-g';
+    window.host = 'readdy.ai';
+</script>
+
+</body>
+</html>

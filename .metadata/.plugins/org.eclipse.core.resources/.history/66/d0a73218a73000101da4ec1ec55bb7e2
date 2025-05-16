@@ -1,0 +1,85 @@
+@charset "UTF-8";
+
+
+/* 상단 텍스트 */
+.main-text {
+    text-align: center;
+    margin-bottom: 3rem; /* mb-12 = 48px */
+}
+
+.main-title {
+    font-size: 1.875rem; /* text-3xl ≈ 30px */
+    font-weight: bold;
+    color: #111827; 
+    margin-bottom: 1rem; /* mb-4 = 16px */
+}
+
+.main-subtext {
+    color: #4B5563; 
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* 여행계획, 고객문의 호버 */
+.tab-buttons {
+    display: flex;
+    gap: 0.5rem; /* gap-2 = 8px */
+    margin-bottom: 1.5rem; /* mb-6 = 24px */
+}
+
+.tab-buttons button {
+    flex: 1;
+    padding: 0.75rem 1rem; /* py-3 px-4 */
+    border-radius: 9999px; /* rounded-full */
+    font-weight: 500;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* 활성 탭 (여행 계획) */
+.tab-active {
+    background-color: #3B82F6; /* Tailwind bg-primary */
+    color: white;
+}
+
+/* 비활성 탭 (고객 문의) */
+.tab-inactive {
+    background-color: transparent;
+    color: #4B5563; /* text-gray-600 */
+}
+
+.tab-inactive:hover {
+    background-color: #F3F4F6; /* hover:bg-gray-100 */
+}
+
+/* 챗봇 컨테이너 */
+<div id="chat-container" class="chat-container">
+    <div class="chat-message">
+        <div class="chat-row">
+            <div class="chat-avatar">
+                <i class="ri-robot-line icon-white"></i>
+            </div>
+            <div class="chat-content">
+                <div class="chat-bubble">
+                    <p class="chat-text">안녕하세요! 저는 당신의 AI여행 플래너 '트리비'입니다. 어떤 여행을 계획하고 계신가요?</p>
+                </div>
+                <div class="chat-options">
+                    <button class="option-button">
+                        <i class="ri-group-line"></i> 가족 여행
+                    </button>
+                    <button class="option-button">
+                        <i class="ri-heart-line"></i> 커플 여행
+                    </button>
+                    <button class="option-button">
+                        <i class="ri-user-line"></i> 혼자 여행
+                    </button>
+                    <button class="option-button">
+                        <i class="ri-user-line"></i> 친구와 함께
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

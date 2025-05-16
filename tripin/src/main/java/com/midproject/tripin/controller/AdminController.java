@@ -12,4 +12,16 @@ public class AdminController {
 		
 		return step;
 	}
+	
+	@RequestMapping(value="chatbot")
+	public String chatbotPage() {
+		
+		return "chatbot";
+	}
+	
+	@RequestMapping(value="login")
+	public String loginPage() {
+		
+		return "login";
+	}
 }

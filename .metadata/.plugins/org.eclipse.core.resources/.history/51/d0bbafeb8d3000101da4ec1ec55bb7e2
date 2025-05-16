@@ -1,0 +1,414 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix='c' uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>마이페이지</title>
+
+<!-- Pacifico 폰트 링크 -->
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<!-- Noto Sans KR 폰트 링크 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&amp;display=swap" rel="stylesheet">
+<!-- Remix icon 아이콘 폰트 라이브러리 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<!-- 내 css 파일경로 -->
+<link href="resources/css/mypage.css" rel="stylesheet">
+<!-- jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- 내 js 파일경로 -->
+<script type="text/javascript" src="resources/js/mypage.js"></script>
+</head>
+<body>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">Tripin</a>
+            <div class="flex items-center space-x-4">
+                <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-notification-3-line text-gray-600"></i>
+                </div>
+                <div class="w-8 h-8 flex items-center justify-center">
+                    <i class="ri-settings-3-line text-gray-600"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-6">
+    
+    
+    
+        <!-- 프로필 섹션 -->
+        <section class="profile-section">
+            <div class="profile-container">
+                <div class="profile-image-wrapper">
+                    <div class="profile-image-box">
+                        <img src="https://readdy.ai/api/search-image?query=portrait%20of%20a%20young%20Korean%20woman%20with%20short%20hair%2C%20soft%20lighting%2C%20minimalist%20background%2C%20professional%20headshot%20style&amp;width=200&amp;height=200&amp;seq=1&amp;orientation=squarish" alt="프로필 이미지" class="w-full h-full object-cover">
+                    </div>
+                    <button class="edit-button">
+                        <i class="ri-pencil-line"></i>
+                    </button>
+                </div>
+                <div class="profile-text">
+                    <h1 id="profile-name" class="profile-name">김지연</h1>
+                    <p id="profile-email" class="profile-email">jiyeon.kim@example.com</p>
+                    <div class="profile-tags">
+                        <span class="tag blue">여행 애호가</span>
+                        <span class="tag green">리뷰 10개</span>
+                        <span class="tag purple">VIP 회원</span>
+                    </div>
+                </div>
+                <button id="edit-profile-btn" class="edit-profile-btn">
+                    프로필 편집
+                </button>
+            </div>
+        </section>
+        
+        
+        
+
+        <!-- 탭 네비게이션 -->
+        <div class="tab-section">
+            <div class="tab-header">
+                <button class="tab-button" id="place-saved">저장한 여행지</button>
+                <button class="tab-button" id="themes-saved">저장한 테마</button>
+                <button class="tab-button" id="review-written">내가 작성한 리뷰</button>
+                 
+            </div>
+			
+            <!-- 저장 콘텐츠 탭 컨텐츠 -->
+            <div id="content-saved" class="p-6">                
+
+                <!-- 저장한 여행지 탭 -->
+                <div id="content-places" class="content-hidden">
+                    <div class="places-grid">
+                        <!-- 저장한 여행지 1 -->
+                        <div class="place-card">
+                            <div class="place-image-wrapper">
+                                <img src="https://readdy.ai/api/search-image?query=beautiful%20landscape%20of%20Seoraksan%20National%20Park%2C%20South%20Korea%2C%20mountain%20peaks%2C%20autumn%20colors%2C%20hiking%20trails%2C%20travel%20destination&amp;width=400&amp;height=200&amp;seq=6&amp;orientation=landscape" alt="설악산" class="w-full h-full object-cover object-top">
+                            </div>
+                            <div class="place-info">
+                                <h3 id="place-title" class="place-title">설악산 국립공원</h3>
+                                <p id="place-location" class="place-location">강원도 속초시</p>
+                                <div class="place-rating">
+                                    <div class="stars">
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-half-fill"></i>
+                                    </div>
+                                    <span class="review-text">4.5 (120 리뷰)</span>
+                                    <span class="review-text">(120 리뷰)</span>
+                                </div>
+                                <div class="flex justify-between mt-4">
+                                    <button class="text-primary flex items-center text-sm">
+                                        <i class="ri-information-line mr-1"></i> 상세정보
+                                    </button>
+                                    <button class="w-8 h-8 flex items-center justify-center text-red-500">
+                                        <i class="ri-heart-fill"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 저장한 여행지 2 -->
+                        <div class="bg-white border rounded overflow-hidden custom-shadow">
+                            <div class="h-40 overflow-hidden">
+                                <img src="https://readdy.ai/api/search-image?query=beautiful%20beach%20of%20Jungmun%20in%20Jeju%20Island%2C%20South%20Korea%2C%20with%20volcanic%20rocks%2C%20clear%20blue%20water%2C%20sandy%20shore%2C%20travel%20destination&amp;width=400&amp;height=200&amp;seq=7&amp;orientation=landscape" alt="중문해변" class="w-full h-full object-cover object-top">
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-bold">중문 해변</h3>
+                                <p class="text-sm text-gray-600 mt-1">제주도 서귀포시</p>
+                                <div class="flex items-center mt-2">
+                                    <div class="flex text-yellow-400">
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-line"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500 ml-2">4.0 (85 리뷰)</span>
+                                </div>
+                                <div class="flex justify-between mt-4">
+                                    <button class="text-primary flex items-center text-sm">
+                                        <i class="ri-information-line mr-1"></i> 상세정보
+                                    </button>
+                                    <button class="w-8 h-8 flex items-center justify-center text-red-500">
+                                        <i class="ri-heart-fill"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 저장한 여행지 3 -->
+                        <div class="bg-white border rounded overflow-hidden custom-shadow">
+                            <div class="h-40 overflow-hidden">
+                                <img src="https://readdy.ai/api/search-image?query=beautiful%20traditional%20village%20of%20Jeonju%20Hanok%20Village%2C%20South%20Korea%2C%20with%20traditional%20Korean%20houses%2C%20cultural%20activities%2C%20travel%20destination&amp;width=400&amp;height=200&amp;seq=8&amp;orientation=landscape" alt="전주한옥마을" class="w-full h-full object-cover object-top">
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-bold">전주 한옥마을</h3>
+                                <p class="text-sm text-gray-600 mt-1">전라북도 전주시</p>
+                                <div class="flex items-center mt-2">
+                                    <div class="flex text-yellow-400">
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                        <i class="ri-star-fill"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-500 ml-2">4.8 (210 리뷰)</span>
+                                </div>
+                                <div class="flex justify-between mt-4">
+                                    <button class="text-primary flex items-center text-sm">
+                                        <i class="ri-information-line mr-1"></i> 상세정보
+                                    </button>
+                                    <button class="w-8 h-8 flex items-center justify-center text-red-500">
+                                        <i class="ri-heart-fill"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 저장한 테마 탭 컨텐츠 -->
+                
+                <div id="content-themes" class="hidden">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- 저장한 테마 1 -->
+                        <div class="bg-white border rounded overflow-hidden custom-shadow">
+                            <div class="h-40 overflow-hidden relative">
+                                <img src="https://readdy.ai/api/search-image?query=Korean%20traditional%20food%20assortment%2C%20bibimbap%2C%20kimchi%2C%20bulgogi%2C%20colorful%20side%20dishes%2C%20authentic%20Korean%20cuisine%2C%20travel%20food%20experience&amp;width=400&amp;height=200&amp;seq=9&amp;orientation=landscape" alt="한식 체험" class="w-full h-full object-cover object-top">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                                    <h3 class="text-white font-bold p-4">한식 체험 여행</h3>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm text-gray-600">전통 한식부터 현대적 퓨전 요리까지, 한국의 맛을 탐험하는 여행</p>
+                                <div class="flex justify-between mt-4">
+                                    <span class="text-sm text-gray-500">10개 장소</span>
+                                    <button class="w-8 h-8 flex items-center justify-center text-red-500">
+                                        <i class="ri-bookmark-fill"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 저장한 테마 2 -->
+                        <div class="bg-white border rounded overflow-hidden custom-shadow">
+                            <div class="h-40 overflow-hidden relative">
+                                <img src="https://readdy.ai/api/search-image?query=Korean%20traditional%20temples%20in%20mountains%2C%20Buddhist%20architecture%2C%20serene%20atmosphere%2C%20spiritual%20journey%2C%20travel%20cultural%20experience&amp;width=400&amp;height=200&amp;seq=10&amp;orientation=landscape" alt="사찰 순례" class="w-full h-full object-cover object-top">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                                    <h3 class="text-white font-bold p-4">한국 사찰 순례</h3>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm text-gray-600">한국의 아름다운 사찰과 불교 문화를 체험하는 명상 여행</p>
+                                <div class="flex justify-between mt-4">
+                                    <span class="text-sm text-gray-500">8개 장소</span>
+                                    <button class="w-8 h-8 flex items-center justify-center text-red-500">
+                                        <i class="ri-bookmark-fill"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 저장한 테마 3 -->
+                        <div class="bg-white border rounded overflow-hidden custom-shadow">
+                            <div class="h-40 overflow-hidden relative">
+                                <img src="https://readdy.ai/api/search-image?query=Korean%20islands%20hopping%2C%20beautiful%20beaches%2C%20coastal%20scenery%2C%20small%20fishing%20villages%2C%20island%20life%2C%20travel%20adventure&amp;width=400&amp;height=200&amp;seq=11&amp;orientation=landscape" alt="섬 여행" class="w-full h-full object-cover object-top">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                                    <h3 class="text-white font-bold p-4">한국 섬 여행</h3>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <p class="text-sm text-gray-600">한국의 아름다운 섬들을 탐험하는 특별한 여행 코스</p>
+                                <div class="flex justify-between mt-4">
+                                    <span class="text-sm text-gray-500">12개 장소</span>
+                                    <button class="w-8 h-8 flex items-center justify-center text-red-500">
+                                        <i class="ri-bookmark-fill"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+				<!-- 내가 작성한 리뷰 탭 컨텐츠 -->
+                
+                <div id="content-reviews" class="hidden">
+                    <div class="space-y-6">
+                        <!-- 리뷰 1 -->
+                        <div class="bg-white border rounded p-4 custom-shadow">
+                            <div class="flex justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 rounded-full overflow-hidden mr-3">
+                                        <img src="https://readdy.ai/api/search-image?query=beautiful%20landscape%20of%20Gyeongbokgung%20Palace%2C%20Seoul%2C%20South%20Korea%2C%20traditional%20Korean%20architecture%2C%20palace%20grounds%2C%20travel%20destination&amp;width=100&amp;height=100&amp;seq=12&amp;orientation=squarish" alt="경복궁" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold">경복궁</h3>
+                                        <div class="flex text-yellow-400 text-sm">
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="text-sm text-gray-500">2025.04.12</span>
+                            </div>
+                            <p class="mt-3 text-gray-700">한국의 역사와 문화를 느낄 수 있는 아름다운 궁궐이었습니다. 특히 수문장 교대식이 인상적이었고, 한복을 입고 방문하니 더욱 특별한 경험이 되었습니다. 계절마다 다른 모습을 보여준다고 하니 다음에는 가을에 방문해보고 싶습니다.</p>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <div class="w-20 h-20 rounded overflow-hidden">
+                                    <img src="https://readdy.ai/api/search-image?query=detailed%20view%20of%20Gyeongbokgung%20Palace%20gate%2C%20traditional%20Korean%20architecture%2C%20tourists%20in%20hanbok%2C%20sunny%20day%2C%20travel%20photo&amp;width=100&amp;height=100&amp;seq=13&amp;orientation=squarish" alt="리뷰 사진" class="w-full h-full object-cover">
+                                </div>
+                                <div class="w-20 h-20 rounded overflow-hidden">
+                                    <img src="https://readdy.ai/api/search-image?query=inside%20Gyeongbokgung%20Palace%2C%20traditional%20Korean%20pavilion%2C%20pond%2C%20mountains%20in%20background%2C%20beautiful%20scenery%2C%20travel%20photo&amp;width=100&amp;height=100&amp;seq=14&amp;orientation=squarish" alt="리뷰 사진" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <div class="mt-3 flex justify-end space-x-2">
+                                <button class="text-gray-500 text-sm flex items-center">
+                                    <i class="ri-edit-line mr-1"></i> 수정
+                                </button>
+                                <button class="text-gray-500 text-sm flex items-center">
+                                    <i class="ri-delete-bin-line mr-1"></i> 삭제
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 리뷰 2 -->
+                        <div class="bg-white border rounded p-4 custom-shadow">
+                            <div class="flex justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 rounded-full overflow-hidden mr-3">
+                                        <img src="https://readdy.ai/api/search-image?query=beautiful%20view%20of%20Gamcheon%20Culture%20Village%2C%20Busan%2C%20South%20Korea%2C%20colorful%20houses%20on%20hillside%2C%20artistic%20murals%2C%20travel%20destination&amp;width=100&amp;height=100&amp;seq=15&amp;orientation=squarish" alt="감천문화마을" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold">감천문화마을</h3>
+                                        <div class="flex text-yellow-400 text-sm">
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-line"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="text-sm text-gray-500">2025.03.07</span>
+                            </div>
+                            <p class="mt-3 text-gray-700">부산의 마추픽추라고 불리는 이곳은 정말 색다른 경험이었습니다. 언덕 위에 알록달록한 집들과 예술 작품들이 어우러져 독특한 분위기를 자아냅니다. 경사가 꽤 가파르니 편한 신발을 신고 가는 것을 추천합니다. 골목길을 따라 걷다 보면 숨겨진 카페와 상점들을 발견할 수 있어요.</p>
+                            <div class="mt-3 flex flex-wrap gap-2">
+                                <div class="w-20 h-20 rounded overflow-hidden">
+                                    <img src="https://readdy.ai/api/search-image?query=colorful%20houses%20in%20Gamcheon%20Culture%20Village%2C%20Busan%2C%20artistic%20street%20view%2C%20narrow%20alleyways%2C%20travel%20photo&amp;width=100&amp;height=100&amp;seq=16&amp;orientation=squarish" alt="리뷰 사진" class="w-full h-full object-cover">
+                                </div>
+                            </div>
+                            <div class="mt-3 flex justify-end space-x-2">
+                                <button class="text-gray-500 text-sm flex items-center">
+                                    <i class="ri-edit-line mr-1"></i> 수정
+                                </button>
+                                <button class="text-gray-500 text-sm flex items-center">
+                                    <i class="ri-delete-bin-line mr-1"></i> 삭제
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t mt-10">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-gray-500 text-sm">© 2025 Tripin. 모든 권리 보유.</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-500 hover:text-primary">고객센터</a>
+                    <a href="#" class="text-gray-500 hover:text-primary">개인정보 처리방침</a>
+                    <a href="#" class="text-gray-500 hover:text-primary">이용약관</a>
+                    <a href="#" class="text-gray-500 hover:text-primary">로그아웃</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<!--     <script type="text/javascript" crossorigin="anonymous" src="https://us-assets.i.posthog.com/array/phc_t9tkQZJiyi2ps9zUYm8TDsL6qXo4YmZx0Ot5rBlAlEd/config.js"></script><script type="text/javascript" crossorigin="anonymous" src="https://us-assets.i.posthog.com/static/dead-clicks-autocapture.js?v=1.242.0"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 메인 탭 전환
+            const mainTabs = {
+                'tab-schedule': 'content-schedule',
+                'tab-saved': 'content-saved',
+                'tab-payment': 'content-payment'
+            };
+
+            Object.keys(mainTabs).forEach(tabId => {
+                document.getElementById(tabId).addEventListener('click', function() {
+                    // 모든 탭 비활성화
+                    Object.keys(mainTabs).forEach(id => {
+                        document.getElementById(id).classList.remove('tab-active');
+                        document.getElementById(id).classList.add('text-gray-500');
+                        document.getElementById(mainTabs[id]).classList.add('hidden');
+                    });
+
+                    // 선택한 탭 활성화
+                    this.classList.add('tab-active');
+                    this.classList.remove('text-gray-500');
+                    document.getElementById(mainTabs[tabId]).classList.remove('hidden');
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 서브 탭 전환
+            const subTabs = {
+                'subtab-places': 'content-places',
+                'subtab-themes': 'content-themes',
+                'subtab-reviews': 'content-reviews'
+            };
+
+            Object.keys(subTabs).forEach(tabId => {
+                document.getElementById(tabId).addEventListener('click', function() {
+                    // 모든 서브탭 비활성화
+                    Object.keys(subTabs).forEach(id => {
+                        document.getElementById(id).classList.remove('subtab-active');
+                        document.getElementById(id).classList.add('text-gray-600');
+                        document.getElementById(subTabs[id]).classList.add('hidden');
+                    });
+
+                    // 선택한 서브탭 활성화
+                    this.classList.add('subtab-active');
+                    this.classList.remove('text-gray-600');
+                    document.getElementById(subTabs[tabId]).classList.remove('hidden');
+                });
+            });
+        });
+    </script>
+<script>
+    !function (t, e) { var o, n, p, r; e.__SV || (window.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split("."); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } } (p = t.createElement("script")).type = "text/javascript", p.crossOrigin = "anonymous", p.async = !0, p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js", (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = "posthog", u.people = u.people || [], u.toString = function (t) { var e = "posthog"; return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e }, u.people.toString = function () { return u.toString(1) + ".people (stub)" }, o = "init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "), n = 0; n < o.length; n++)g(u, o[n]); e._i.push([i, s, a]) }, e.__SV = 1) }(document, window.posthog || []);
+    posthog.init('phc_t9tkQZJiyi2ps9zUYm8TDsL6qXo4YmZx0Ot5rBlAlEd', {
+        api_host: 'https://us.i.posthog.com',
+        autocapture: false,
+        capture_pageview: false,
+        capture_pageleave: false,
+        capture_performance: {
+            web_vitals: false,
+        },
+        rageclick: false,
+    })
+    window.shareKey = 'vvu1-S91ByqFvJ6UrZFq-g';
+    window.host = 'readdy.ai';
+</script>
+<script src="https://static.readdy.ai/static/share.js"></script> -->
+
+<div id="watermark" class="group" style="position: fixed; bottom: 48px; right: 46px; width: 184px; height: 39px; background-color: rgb(240, 240, 240); border-style: solid; border-width: 3px; border-radius: 12px; border-image-slice: 3; border-image-width: 3px; border-image-outset: 0; border-color: rgb(229, 231, 235); display: flex; align-items: center; justify-content: center; cursor: pointer;"><div class="designed-by" style="color: rgb(93, 93, 93); font-family: &quot;Secular One&quot;; font-size: 12px; line-height: 20px; font-weight: 400; padding-left: 12px;">Designed by</div><img src="https://public.readdy.ai/gen_page/watermark.png" style="width: 86px; margin-left: 0px;"></div></body>
+
+</body>
+</html>

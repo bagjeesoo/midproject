@@ -13,6 +13,9 @@
 <a href="chatbot.do">챗봇페이지</a>
 <br/>
 <a href="admin.do">관리자페이지</a>
+<br/>
+<a href="mypage.do">마이페이지</a>
+
 
 </body>
 </html>

@@ -1,0 +1,190 @@
+$(function(){
+	allChatListByUser(1);
+	
+	//테스트
+	$('.main_title').click(function(){
+		alert('')
+		allChatListByUser(1);
+	})
+	
+	// 여행계획, 고객문의 클릭시 색바꿈(대화내용 남아 있도록 해야함/DB에서 히스토리 가져오기)
+	$('div.tab-buttons>button').click(function(){
+		$('div.tab-buttons>button').attr('class', 'tab-inactive');
+		$(this).attr('class', 'tab-active');
+	})
+	
+	// 테마(가족, 커플, 혼자, 친구) 클릭 시 챗봇 요청 및 응답
+	$('.option-button').click(function(){
+		let clickMsg = $(this).text().trim()
+		let requestThemes = clickMsg+"갈 여행지를 추천해주세요. 100자 이내로 추천해주세요.";
+		userMsgRow(clickMsg);
+		
+		$.ajax({
+			type:"get"
+			, data:{question:requestThemes}
+			, url: "http://127.0.0.1:5000"
+			, contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+			, dataType: "text"
+			, success: function(result){
+				// gemini에서 받아오는 메세지
+				botMsgRow(result);
+				// 서버에 저장하기
+				let chatbot_resp = $('.chat-bubble:last').find('p').text();
+				sendServer(1, clickMsg, chatbot_resp)
+			}
+			, error: function(err){
+				alert('실패');
+				console.log(err);	
+			}
+			
+		})
+		
+	})
+	
+	
+	
+	// '보내기' 클릭 시 메세지 입력으로 챗봇 요청 및 응답(엔터 키 눌렀을 때도 구현 해야함)	
+	$('#send_btn').click(function(){
+		
+		
+		//보낸 메세지 먼저 채팅창에 띄우기 
+		let sendMsg = $('.message-input').val();
+		userMsgRow(sendMsg);
+		
+		// jemini에 메세지 보내고 답변 받기(ajax)
+		let sendParam = { question : sendMsg+'. 100자 이내로 답변해주세요.'};		
+		console.log(sendParam);
+		$.ajax({
+			type:'get'
+			,data: sendParam
+			,url: "http://127.0.0.1:5000"
+			,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+			,dataType:"text"
+			,success: function(result){			
+			// gemini에서 받아오는 메세지
+			botMsgRow(result);
+			// 서버에 저장
+			let chatbot_resp = $('.chat-bubble:last').find('p').text();
+			console.log(chatbot_resp);
+			sendServer(1, sendMsg, chatbot_resp);
+			
+			}
+			, error: function(err){
+				alert('실패');
+				console.log(err);	
+			}
+		})		
+	})
+	
+	//*********functions**********
+	// gemini에서 받아오는 메세지 컨테이너에 띄우는 함수<div class="chat-content"></div>
+	function botMsgRow(msg) {
+		let responseMsg = $(`<div class="chat-row chat-row-left">
+								<div class="chat-avatar">
+									<i class="ri-robot-line text-white"></i>
+								</div>
+								<div class="chat-bubble">
+									<p class="chat-text">${msg}</p>
+								</div>
+							</div>`);
+		
+		$('#chat-container').append(responseMsg);	
+	};
+	
+	// 사용자가 보내는 함수 // 사용자 발송 메세지 변수(chat-avatar는 사용자 프로필사진으로 바꿔야함)
+	function userMsgRow(msg) {
+		let realsendMsg=$(`<div class="chat-row chat-row-right">
+								<div class="chat-bubble-right">
+									<p class="chat-text-white">${msg}</p>
+								</div>
+								<div class="chat-avatar">
+									<i class="ri-robot-line text-white"></i>
+								</div>
+							</div>`);
+
+		$('#chat-container').append(realsendMsg);
+		$('.message-input').val('');
+	};
+	
+	// 대화기록 전체 불러오기 함수
+	function allChatListByUser(id) {
+		
+		
+		$.ajax({
+			type:'get'
+			,url:`selectByUser`
+			,data:{user_id:id}
+			,dataType:'json'
+			,success: function(result){
+				console.log(result);
+				
+//				$('#chat-container').empty();
+				for(row of result) {
+					let record_conv=$(`<div class="chat-row chat-row-right">
+											<div class="chat-bubble-right">
+												<p class="chat-text-white">${row['user_query']}</p>
+											</div>
+											<div class="chat-avatar">
+												<i class="ri-robot-line text-white"></i>
+											</div>
+										</div>
+										<div class="chat-row chat-row-left">
+											<div class="chat-avatar">
+												<i class="ri-robot-line text-white"></i>
+											</div>
+											<div class="chat-bubble">
+												<p class="chat-text">${row['chat_resp']}</p>
+											</div>
+										</div>`)
+							//$('#chat-container').append(record_conv);
+									}
+				
+				
+				
+				
+			}
+			,error: function(err){
+				alert('대화내용 불러오기 실패');
+				console.log(err);
+			}
+		})
+		
+	}
+	
+	// user_id, user_query, chatbot_resp 서버로 보내기 // 인자에 userId 넣어야함
+	function sendServer(userId, userReq, chatResp) {
+		
+		let user_id = 1;
+		
+		let param = {user_id:userId , user_query: userReq , chatbot_resp:chatResp };
+		
+		$.ajax({
+			type:'post'
+			,data: param
+			,url: `insertChat/${user_id}`
+			,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+			,success: function(){
+				alert('입력성공');
+			}
+			,error: function(){
+				console.log(err);
+			}
+		})
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+		
+	
+})
