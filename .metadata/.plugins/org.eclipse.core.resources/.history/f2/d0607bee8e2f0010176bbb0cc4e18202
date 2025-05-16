@@ -1,0 +1,12 @@
+$(function(){
+	
+	$('#loginBtn').click(function(){
+		alert('로그인');
+		location.href='login.do'
+	})
+	
+	$('.option-button').click(function(){
+		alert($(this).text())
+		console.log($(this).text())
+	})
+})

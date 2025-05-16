@@ -1,0 +1,6 @@
+$(function(){
+	
+	/*$('#loginBtn').click(function(){
+		alert('로그인')
+	})*/
+})

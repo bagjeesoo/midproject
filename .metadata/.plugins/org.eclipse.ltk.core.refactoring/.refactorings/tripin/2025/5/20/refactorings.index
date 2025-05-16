@@ -9,7 +9,10 @@
 1747033664599	Rename type 'PlaceDetail'
 1747036235912	Delete element
 1747038332196	Delete element
+<<<<<<< HEAD
 1747277151717	Move compilation unit
 1747278151505	Move compilation unit
 1747280101637	Move compilation unit
 1747286820249	Rename package 'com.midproject.tripins.service.impl'
+=======
+>>>>>>> 777fcef (first)

@@ -958,3 +958,11 @@
 0:0:0:0:0:0:0:1 - - [16/May/2025:17:22:25 +0900] "GET /tripin/selectByUser/1?user_id=1 HTTP/1.1" 200 2593
 0:0:0:0:0:0:0:1 - - [16/May/2025:17:22:25 +0900] "GET /favicon.ico HTTP/1.1" 404 819
 0:0:0:0:0:0:0:1 - - [16/May/2025:17:22:27 +0900] "GET /tripin/inquiries/1?user_id=1 HTTP/1.1" 200 2136
+127.0.0.1 - - [16/May/2025:17:57:13 +0900] "GET / HTTP/1.1" 404 808
+0:0:0:0:0:0:0:1 - - [16/May/2025:17:57:14 +0900] "GET /tripin/index.jsp HTTP/1.1" 200 300
+0:0:0:0:0:0:0:1 - - [16/May/2025:17:57:16 +0900] "GET /tripin/chatbot.do HTTP/1.1" 200 8069
+0:0:0:0:0:0:0:1 - - [16/May/2025:17:57:16 +0900] "GET /tripin/resources/css/chatbot.css HTTP/1.1" 200 8310
+0:0:0:0:0:0:0:1 - - [16/May/2025:17:57:16 +0900] "GET /tripin/resources/js/chatbot.js HTTP/1.1" 200 11507
+0:0:0:0:0:0:0:1 - - [16/May/2025:17:57:17 +0900] "GET /tripin/selectByUser/1?user_id=1 HTTP/1.1" 200 2593
+0:0:0:0:0:0:0:1 - - [16/May/2025:17:57:19 +0900] "GET /tripin/inquiries/1?user_id=1 HTTP/1.1" 200 2136
+0:0:0:0:0:0:0:1 - - [16/May/2025:17:57:19 +0900] "GET /tripin/selectByUser/1?user_id=1 HTTP/1.1" 200 2593
