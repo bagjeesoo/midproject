@@ -21,15 +21,15 @@ public class ChatbotController {
 	private ChatbotServiceImpl chatbotServiceImpl;
 	  
 	// ********추천챗봇***********
-	  @GetMapping(value="selectByUser/{user_id}")
-	  public List<ChatbotRecommendationVO> getChatList(@PathVariable Integer user_id, Model m) {
+	  @GetMapping(value="selectByUser")
+	  public List<ChatbotRecommendationVO> getChatList(Integer user_id, Model m) {
 		  List<ChatbotRecommendationVO> chatList = chatbotServiceImpl.getChatList(user_id);
 		  m.addAttribute("chatList", chatList);
 		  return chatList;
 	  }
 	  
-	  @PostMapping(value="insertChat/{user_id}")
-	  public void insertChat(@PathVariable Integer user_id, ChatbotRecommendationVO vo){
+	  @PostMapping(value="insertChat")
+	  public void insertChat(Integer user_id, ChatbotRecommendationVO vo){
 		  chatbotServiceImpl.insertChat(vo);
 	  }
 	  
@@ -37,21 +37,18 @@ public class ChatbotController {
 	// ********문의챗봇***********
 	  @GetMapping(value="inquiry")
 	  public FAQVO inquireResponseSelect(Integer inquiry_id) {
-		  System.out.println("***********"+inquiry_id);
 		  FAQVO faqVO = chatbotServiceImpl.inquireResponseSelect(inquiry_id);
-		  System.out.println(faqVO.toString());
 		  return faqVO;
 	  }
 	  
-	  @GetMapping(value="inquiries/{user_id}")
-	  public List<InquiriesVO> getInquiriesList(@PathVariable Integer user_id){
+	  @GetMapping(value="inquiries")
+	  public List<InquiriesVO> getInquiriesList(Integer user_id){
 		  List<InquiriesVO> inquiriesList = chatbotServiceImpl.getInquiriesList(user_id);
-		  System.out.println(inquiriesList);
 		  return inquiriesList;
 	  }
 	  
-	  @PostMapping(value="insertInqChat/{user_id}")
-	  public void insertInqChat(@PathVariable Integer user_id, InquiriesVO vo){
+	  @PostMapping(value="insertInqChat")
+	  public void insertInqChat(Integer user_id, InquiriesVO vo){
 		  chatbotServiceImpl.insertInqChat(vo);
 	  }
 	  

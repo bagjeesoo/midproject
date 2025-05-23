@@ -15,7 +15,8 @@
 <a href="admin.do">관리자페이지</a>
 <br/>
 <a href="mypage.do">마이페이지</a>
-
+<br/>
+<a href="weather.do">날씨</a>
 
 </body>
 </html>

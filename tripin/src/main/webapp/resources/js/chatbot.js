@@ -1,9 +1,14 @@
 $(function(){
 	
-	let user_id=1;
-	
+	$('#chat-inq-container').hide();
+	let user_id=USER_ID;
+	alert('USER_ID='+user_id)
 	allRecChatListByUser(user_id);
 	$('#chat-inq-container').hide();
+	
+	$('.icon-button').click(function(){
+		location.href='mypage.do';
+	})
 	
 //	//테스트
 //	$('.main_title').click(function(){
@@ -77,12 +82,24 @@ $(function(){
 		}
 	})
 	
-	// 고객문의(이용, 신고, 추천, 1:1)문의 클릭 시 채팅창 띄우기
-	$('.option-inq-button').click(function(){
-		// 고객문의 버튼 인덱스 가져오기
-		let indexOfInqBtn = $('.option-inq-button').index($(this))+1;
+	
+	
+		
+	$('#chat-inq-container').on('click', '.option-inq-button', function(){
 		let inqBtnStr = $(this).text().trim();
-		alert(indexOfInqBtn)
+		
+		let keyOfInqTab = 1;
+		//////////인덱스가 아닌 text값으로 insert
+		if(inqBtnStr == '이용 문의') keyOfInqTab = 1;
+		else if(inqBtnStr == '신고 문의') keyOfInqTab = 2;
+		else if(inqBtnStr == '추천 문의') keyOfInqTab = 3;
+		else if(inqBtnStr == '관리자 문의') keyOfInqTab = 4;
+		else if(inqBtnStr == '결제 문의') keyOfInqTab = 5;
+		else if(inqBtnStr == '수정 문의') keyOfInqTab = 6;
+		else if(inqBtnStr == '탈퇴 문의') keyOfInqTab = 7;
+		
+		alert(keyOfInqTab)
+		
 		// 고객이 클릭한 버튼 채팅창에 띄우기
 		let selectedBtn =$(`<div class="forEmpty chat-row chat-row-right">
 								<div class="chat-bubble-right">
@@ -99,7 +116,7 @@ $(function(){
 		// 버튼에 대한 답변 가져와서 챗봇창에 띄우기
 		$.ajax({
 			type:"get"
-			, data:{inquiry_id:indexOfInqBtn}
+			, data:{inquiry_id:keyOfInqTab}
 			, url: 'inquiry'
 			, contentType: "application/x-www-form-urlencoded; charset=UTF-8"
 			, dataType: "json"
@@ -119,7 +136,7 @@ $(function(){
 				//고객문의 시 대화내용 서버에 insert
 				insertInqServer(user_id, inqBtnStr, result['response'])
 				
-				if(indexOfInqBtn==4) {
+				if(keyOfInqTab==4) {
 					$('#chat-inq-container').append(newButtons());
 					
 					
@@ -149,6 +166,7 @@ $(function(){
 			
 		})
 	});
+
 	
 	
 	//*********functions**********
@@ -188,7 +206,7 @@ $(function(){
 		
 		$.ajax({
 			type:'get'
-			,url:`selectByUser/${user_id}`
+			,url:`selectByUser`
 			,data:{user_id:id}
 			,dataType:'json'
 			,success: function(result){
@@ -231,7 +249,7 @@ $(function(){
 			
 			$.ajax({
 				type:'get'
-				,url:`inquiries/${user_id}`
+				,url:`inquiries`
 				,data:{user_id:id}
 				,dataType:'json'
 				,success: function(result){
@@ -279,24 +297,29 @@ $(function(){
 		// jemini에 메세지 보내고 답변 받기(ajax)
 		let sendParam = { question : sendMsg+'. 100자 이내로 답변해주세요.'};		
 		
-		$.ajax({
-			type:'get'
-			,data: sendParam
-			,url: "http://127.0.0.1:5000"
-			,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
-			,dataType:"text"
-			,success: function(result){			
-			// gemini에서 받아오는 메세지
-			botMsgRow(result);
-			// 서버에 저장
-			let chatbot_resp = $('#chat-reco-container .chat-bubble:last').find('p').text();
-			insertRecoServer(user_id, sendMsg, chatbot_resp);
-			}
-			, error: function(err){
-				alert('실패');
-				console.log(err);	
-			}
-		})		
+		if(sendMsg != '') {
+			$.ajax({
+				type:'get'
+				,data: sendParam
+				,url: "http://127.0.0.1:5000"
+				,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+				,dataType:"text"
+				,success: function(result){			
+				// gemini에서 받아오는 메세지
+				botMsgRow(result);
+				// 서버에 저장
+				let chatbot_resp = $('#chat-reco-container .chat-bubble:last').find('p').text();
+				insertRecoServer(user_id, sendMsg, chatbot_resp);
+				}
+				, error: function(err){
+					alert('실패');
+					console.log(err);	
+				}
+			})
+		}else {
+			botMsgRow('구체적으로 답변해주세요!');
+		}
+		
 	}
 	
 	// (추천컨테이너)user_id, user_query, chatbot_resp -> INSERT
@@ -309,7 +332,7 @@ $(function(){
 		$.ajax({
 			type:'post'
 			,data: param
-			,url: `insertChat/${user_id}`
+			,url: `insertChat`
 			,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
 			,success: function(){
 				
@@ -330,7 +353,7 @@ $(function(){
 				      <div class="chat-content">
 				        <div class="chat-options">
 				          <button class="option-inq-button">
-				            <i class="ri-group-line mr-2"></i>ㅇㅇ 문의
+				            <i class="ri-group-line mr-2"></i>결제 문의
 				          </button>
 				          <button class="option-inq-button">
 				            <i class="ri-heart-line mr-2"></i>수정 문의
@@ -358,7 +381,7 @@ $(function(){
 		$.ajax({
 			type:'post'
 			,data: param
-			,url: `insertInqChat/${user_id}`
+			,url: `insertInqChat`
 			,contentType: "application/x-www-form-urlencoded; charset=UTF-8"
 			,success: function(){
 				

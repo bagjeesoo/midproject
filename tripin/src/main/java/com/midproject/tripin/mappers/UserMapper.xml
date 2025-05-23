@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.midproject.tripin.AdminRepo">
+<mapper namespace="com.midproject.tripin.repository.UserRepo">
 
+	<select id="selectUser" parameterType="Integer" resultType="com.midproject.tripin.model.UserVO">
+		SELECT * FROM users
+		WHERE user_id=#{user_id}
+	</select>
 	
+	<update id="updateUser" parameterType="com.midproject.tripin.model.UserVO">
+		UPDATE users SET user_name=#{user_name}, password=#{password}, phone_num=#{phone_num}
+		WHERE user_id=#{user_id}
+	</update>
 
 </mapper>

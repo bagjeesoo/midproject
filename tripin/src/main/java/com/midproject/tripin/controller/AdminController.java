@@ -6,12 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class AdminController {
-
-	@RequestMapping(value="{step}")
-	public String admin(@PathVariable String step ) {
-		
-		return step;
-	}
 	
 	@RequestMapping(value="chatbot")
 	public String chatbotPage() {
@@ -23,5 +17,15 @@ public class AdminController {
 	public String loginPage() {
 		
 		return "login";
+	}
+	
+	@RequestMapping(value="admininq")
+	public String admininq() {
+		return "";
+	}
+	
+	@RequestMapping(value="weather")
+	public String weather() {
+		return "weather";
 	}
 }

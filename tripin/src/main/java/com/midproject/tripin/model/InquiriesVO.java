@@ -9,4 +9,11 @@ public class InquiriesVO {
 	private String user_query;
 	private String chatbot_resp;
 	private String conv_at;
+	private String inquiry_category;
+	private String inquiry_detail;
+	private String inquiry_satus;
+	private Integer assigned_admin_id;
+	private String admin_response;
+	private String responded_at;
+	private String priority;
 }

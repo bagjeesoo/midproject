@@ -1,9 +1,0 @@
-package com.midproject.tripin.repository;
-
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
-
-@Mapper
-public class ChatbotRepo {
-
-}
